@@ -8,6 +8,10 @@ from flask.ext.wtf import Form
 from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_debugtoolbar import DebugToolbarExtension
+from flask.ext.login import UserMixin
+from flask.ext.login import LoginManager
+from flask.ext.login import login_required
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -22,6 +26,10 @@ manager = Manager(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 db = SQLAlchemy(app)
+toolbar = DebugToolbarExtension(app)
+login_manager = LoginManager(app)
+login_manager.session_protection = 'strong'
+# login_manager.login_view = 'login'
 
 
 class FormLogin(Form):
@@ -53,11 +61,12 @@ class CodeSessions(db.Model):
         return '<CodeSessions %r>' % self.session_address
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     '''a schema for storing user data'''
 
     __tablename__ = 'tbl_users'
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     hashed_pass = db.Column(db.String(128))
     sessions = db.relationship('CodeSessions',
@@ -89,6 +98,12 @@ def index():
 def auth():
     form = FormLogin()
     return render_template('login.html', form=form)
+
+
+@app.route('/secret')
+@login_required
+def secret():
+    return 'Only authenticated users are allowed!'
 
 if __name__ == '__main__':
     manager.run()
