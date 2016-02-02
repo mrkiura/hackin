@@ -11,3 +11,7 @@ body {
     padding-left: 550px;
     padding-top: 550px;
 }
+
+.container {
+	float: center;
+}
