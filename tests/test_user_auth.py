@@ -1,6 +1,6 @@
 import unittest
 
-from app.server import User
+from server import User
 
 
 class UserModelTestCase(unittest.TestCase):
