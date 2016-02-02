@@ -1,7 +1,13 @@
-body{
-	font-family:"Roboto", sans-serif;
-	color:#fff;
-	font-size:18px;
-	/*color: white;*/
-	background:url(../img/background.jpg) top center no-repeat #000;
+body {
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    font-size: 18px;
+    /*color: white;*/
+    background: url(../img/background.jpg) top center no-repeat #000;
+}
+
+#sign_in {
+   
+    padding-left: 550px;
+    padding-top: 550px;
 }

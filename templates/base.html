@@ -1,0 +1,41 @@
+{% extends "bootstrap/base.html" %} 
+
+{% block title %}Home{% endblock %} 
+
+{% block navbar %}
+<div class="navbar navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand navbar-left" href="/">Hackin</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">My hacks</a></li>
+                <li><a href="#">Public hacks</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div class="container">
+
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
