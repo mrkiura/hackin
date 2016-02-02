@@ -5,7 +5,7 @@ from app.server import User
 
 class UserModelTestCase(unittest.TestCase):
     '''class to test user creation and
-    passwor verification
+    password verification
     '''
 
     def test_create_user(self):
