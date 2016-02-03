@@ -4,6 +4,7 @@ from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
 from flask.ext.login import LoginManager
+from flask_debugtoolbar import DebugToolbarExtension
 
 bootstrap = Bootstrap()
 moment = Moment()
@@ -20,6 +21,7 @@ def create_app(data):
     bootstrap.init_app(app)
     moment.init_app(app)
     login_mgr.init_app(app)
+    toolbar = DebugToolbarExtension(app)
 
     from main import main as main_bp
     from .auth import auth as auth_bp

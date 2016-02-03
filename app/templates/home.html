@@ -1,0 +1,7 @@
+{% extends "base.html" %} 
+{% block title %} Hackin - Home{% endblock %} 
+
+{% block page_content %} 
+<h1>Hello, {% if current_user.is_authenticated %} {{ current_user.email }} {% else %} Stranger 
+{% endif %}! </h1>
+ {% endblock %}

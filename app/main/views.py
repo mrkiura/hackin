@@ -5,3 +5,7 @@ from forms import FormLogin
 @main.route('/')
 def index():
     return render_template('index.html')
+
+@main.route('/home')
+def home():
+    return render_template('home.html')
