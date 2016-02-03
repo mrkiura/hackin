@@ -21,8 +21,13 @@
                 <li><a href="#">Public hacks</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
                 <li><a href="#">Help</a></li>
-                <li><a href="/">Sign out</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('auth.logout')}}">Sign out</a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.login')}}">Sign in</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
