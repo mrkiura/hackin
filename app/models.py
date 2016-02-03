@@ -1,5 +1,6 @@
 from . import db
 from flask.ext.login import UserMixin
+from . import login_mgr
 # data model respresentign many to many relationship.
 unions = db.Table('unions',
                   db.Column('session_id', db.Integer,
@@ -47,3 +48,7 @@ class User(UserMixin, db.Model):
 
     def verify_pass(self, password):
         return check_password_hash(self.hashed_pass, password)
+
+    @login_mgr.user_loader
+    def load_user(user_id):
+      return User.query.get(int(user_id))
