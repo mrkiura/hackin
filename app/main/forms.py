@@ -4,11 +4,13 @@ from wtforms.validators import Required, Length, Email, EqualTo
 
 
 class FormLogin(Form):
-    '''A class to instantiate wtf forms'''
+    '''A class to instantiate login forms'''
     email = StringField('Email', 
         validators=[Required(), Length(1, 64), Email()])
     password = PasswordField('Password', validators=[Required()])
     remember_me = BooleanField('Keep me signed in')
     submit = SubmitField('Log In')
 
-
+class NewSession(Form):
+    '''A class to instantiate new session forms'''
+    submit = SubmitField('Create')

@@ -14,6 +14,14 @@ def home():
     return render_template('home.html')
 
 
+@main.route('/new')
+def new_session():
+    return render_template('add_session.html')
+
+@main.route('/sessions'):
+return render_template('sessions.html')
+
+
 # @main.route('/online')
 # def see_online():
 #     return Response('Online: %s' % ', '.join(active.get_online_users()),
