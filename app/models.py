@@ -1,6 +1,8 @@
 from . import db
 from flask.ext.login import UserMixin
 from . import login_mgr
+from werkzeug.security import generate_password_hash, check_password_hash
+
 # data model respresentign many to many relationship.
 unions = db.Table('unions',
                   db.Column('session_id', db.Integer,
