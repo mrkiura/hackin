@@ -1,33 +1,33 @@
-// initialize data store and the editors
-var startEditor = function() {
-    var editor = ace.edit('firepad');
-    editor.$blockScrolling = Infinity;
+var configEditor = function() {
+    // Get a firebase reference
+    var firepadRef = getFirebaseRef();
+ 	
+    //// Create ACE
+    var editor = ace.edit("firepad");
     editor.setTheme("ace/theme/monokai");
-    editor.setFontSize(14)
+    editor.setFontSize(20)
     var session = editor.getSession();
     session.setUseWrapMode(true);
     session.setUseWorker(false);
     session.setMode("ace/mode/python");
-
-    var firepad = Firepad.fromACE(getUserRef(), editor, {
-        defaultText: '# Hack in python'
+    
+    // start a firepad instance
+    var firepad = Firepad.fromACE(firepadRef, editor, {
+        defaultText: '# let\'s write some python'
     });
 }
 
-var getUserRef = function() {
-   var fbRef = new Firebase('https://hack-in.firebaseio.com');
-      var hash = window.location.hash.replace(/#/g, '');
-      console.log(hash)
-      console.log(fbRef)
-      if (hash) {
-        fbRef = fbRref.child(hash);
-      } else {
+//get's a firebase ref, and adds a hash to the url
+var getFirebaseRef = function() {
+    var fbRef = new Firebase('https://hack-in.firebaseio.com');
+    var urlHash = window.location.hash.replace(/#/g, '');
+    if (urlHash) {
+        fbRef = fbRef.child(hash);
+    } else {
         fbRef = fbRef.push(); // generate unique location.
         window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.
-      }
-      if (typeof console !== 'undefined')
-        console.log('Firebase data: ', fbRef.toString());
-      return fbRef;
+    }
+    return ref;
 }
 
-window.onload = startEditor;
+window.onload = configEditor;

@@ -7,6 +7,7 @@
 <div class="container"> {% if current_user.is_authenticated %}
 	
     <div id="firepad"></div>
+
     {% else %} Please <a href="/login">Sign in</a>  to start hacking or <a href="/signup">Sign up</a>  if you are a new user{% endif %}
 </div>
 
@@ -21,4 +22,5 @@
 
 <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.js"></script>
 <script src="../static/js/editor.js"></script>
+
 {% endblock %} {% endblock %}
