@@ -11,8 +11,9 @@ app = create_app('default')
 manager = Manager(app)
 migrate = Migrate(app)
 
+
 def make_shell_context():
-    return {app:app, db:db, User:User, CodeSessions:CodeSessions}
+    return {app: app, db: db, User: User, CodeSessions: CodeSessions}
 manager.add_command('shell', Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 

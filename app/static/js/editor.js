@@ -22,12 +22,12 @@ var getFirebaseRef = function() {
     var fbRef = new Firebase('https://hack-in.firebaseio.com');
     var urlHash = window.location.hash.replace(/#/g, '');
     if (urlHash) {
-        fbRef = fbRef.child(hash);
+        fbRef = fbRef.child(urlHash);
     } else {
         fbRef = fbRef.push(); // generate unique location.
         window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.
     }
-    return ref;
+    return fbRef;
 }
 
 window.onload = configEditor;

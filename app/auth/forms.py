@@ -5,8 +5,8 @@ from wtforms.validators import Required, Length, Email, Regexp, EqualTo
 
 class FormLogin(Form):
     '''A form to authenticate users'''
-    email = StringField('Email', 
-        validators=[Required(), Length(1, 64), Email()])
+    email = StringField('Email',
+                        validators=[Required(), Length(1, 64), Email()])
     password = PasswordField('Password', validators=[Required()])
     remember_me = BooleanField('Keep me signed in')
     submit = SubmitField('Log In')
@@ -14,17 +14,17 @@ class FormLogin(Form):
 
 class FormSignUp(Form):
     '''a form to sign up users'''
-    email = StringField('Email', 
-        validators=[Required(), Length(1, 64), Email()])
+    email = StringField('Email',
+                        validators=[Required(), Length(1, 64), Email()])
     username = StringField('Username', validators=[
         Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-            'Usernames must have only letters, '\
-                'numbers, dots or underscores')])
-    password = PasswordField('Password', 
-        validators=[Required(), EqualTo('password_cfm', 
-            message='Please enter similar passwords.')])
-    password_cfm = PasswordField('Confirm password', 
-        validators=[Required()])
+                                          'Usernames must have only letters, '
+                                          'numbers, dots or underscores')])
+    password = PasswordField('Password',
+                             validators=[Required(), EqualTo('password_cfm',
+                                                             message='Please enter similar passwords.')])
+    password_cfm = PasswordField('Confirm password',
+                                 validators=[Required()])
     submit = SubmitField('Sign up')
 
     def verify_email(self, email):
