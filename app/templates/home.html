@@ -2,10 +2,12 @@
 {% block title %} Hackin - Home{% endblock %} 
 
 {% block page_content %}
-<h1>Welcome {% if current_user.is_authenticated %} {{ current_user.username }} {% else %} {% endif %}! </h1>
+<h1>Start hacking  </h1>
 
-<div class="container">
+<div class="container"> {% if current_user.is_authenticated %}
+	
     <div id="firepad"></div>
+    {% else %} Please <a href="/login">Sign in</a>  to start hacking or <a href="/signup">Sign up</a>  if you are a new user{% endif %}
 </div>
 
 {% block scripts %} {{super()}}
@@ -15,6 +17,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
 <!-- firepad -->
 <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
-<script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" />
+
+<script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.js"></script>
 <script src="../static/js/editor.js"></script>
 {% endblock %} {% endblock %}

@@ -1,9 +1,9 @@
-body {
+.home {
     font-family: "Roboto", sans-serif;
     color: #fff;
     font-size: 18px;
     /*color: white;*/
-    background: url(../img/background.jpg) top center no-repeat #000;
+    /*background: url(../img/background.jpg) top center no-repeat #000;*/
 }
 
 #sign_in {
@@ -14,4 +14,10 @@ body {
 
 .container {
 	float: center;
+}
+
+#firepad {
+  width: 700px;
+  height: 450px;
+  /*background-color: #483B3B; */
 }
