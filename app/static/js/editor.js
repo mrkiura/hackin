@@ -55,6 +55,10 @@ var getFirebaseRef = function() {
         fbRef = fbRef.child(urlHash);
     } else {
 
+        if (window.location.pathname.indexOf('home') || window.location.pathname.indexOf('sessions')) {
+            return fbRef;
+        }
+
 
         fbRef = fbRef.push(); // generate unique location.
         window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.

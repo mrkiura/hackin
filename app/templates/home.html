@@ -1,20 +1,43 @@
-{% extends "base.html" %} {% block title %} Hackin - Home{% endblock %} {% block page_content %}
-<h1>Start hacking  </h1>
-<div class="container"> {% if current_user.is_authenticated %}
-    <h1 id="username">{{current_user.username}}</h1> {% for session in sessions %}
+{% extends "base.html" %} 
+
+{% block title %} Hackin - Home{% endblock %} 
+
+{% block page_content %}
+{% if current_user.is_authenticated %}
+<div class="col-md-2 well ">
+
+<h3>Available Users</h3>
+    {% for username, email in session['users'] %}
+    
     <div class="list-group" id="code-sessions">
-        
-        
+
+        <button type="button" class="list-group-item">{{username}}</button>            
+
+    </div>
+    {% endfor %}
+    {% else %}
+{% endif %}
+</div>
+
+
+<div class="col-md-1"></div>
+<div class="container col-md-6 well"> {% if current_user.is_authenticated %}
+<h3>Saved sessions</h3>
+    <h1 id="username">{{current_user.username}}</h1> 
+    {% for session in sessions %}
+    <div class="list-group" id="code-sessions">
         {% if session.session_address %}
-        <a href="{{session.session_address}}" >
+        <a href="{{session.session_address}}">
         {% else %}
         <a href="#" >
         {% endif %}
           <h4 class="list-group-item">{{session.session_name}}</h4>
           <!-- <button type="button" class="list-group-item">{{session.session_name}}</button> -->            
         </a>
-        <p class="list-group-item-text">This is a session written in {{session.session_lang}}</p>
-        <a href="/delete:{{session.id}}"><button type="button" class="btn btn-danger list-group-item-btn">Delete Session</button></a>             
+        <!-- <p class="list-group-item-text">This is a session written in {{session.session_lang}}</p> -->
+        <a href="/delete:{{session.id}}">
+            <button type="button" class="btn btn-danger list-group-item-btn">Delete Session</button>
+        </a>
     </div>
     {% endfor %} {% else %} Please <a href="/login">Sign in</a> to start hacking or <a href="/signup">Sign up</a> if you are a new user {% endif %}
 </div>

@@ -1,33 +1,31 @@
-from flask import render_template, session, url_for, Response, redirect, request
+from flask import render_template, session, url_for, Response, \
+    redirect, request, jsonify
 from . import main
 from forms import FormLogin, NewSession
 from .. import db
 from ..models import CodeSessions, User
-from app import login_mgr
-from flask.ext.login import login_user, logout_user, login_required, current_user
-import flask
-import json
+from flask.ext.login import current_user
 
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html', session=session)
 
 
 @main.route('/home')
 def home():
+    online_users = User.query.all()
     # query for sessions by this user
     user = User.query.get(current_user.id)
     sessions = user.sessions
-    return render_template('home.html', sessions=sessions)
+    return render_template('home.html', sessions=sessions, session=session, users=online_users)
 
 
 @main.route('/sessions')
 def sessions():
-    return render_template('sessions.html')
+    return render_template('sessions.html', session=session)
 
 
-@main.route('/myhacks')
 @main.route('/new', methods=['GET', 'POST'])
 def new_session():
     form = NewSession()
@@ -39,8 +37,8 @@ def new_session():
         db.session.add(user_)
         db.session.commit()
         id_ = session_.id
-        return render_template('sessions.html', id_=id_)
-    return render_template('add_session.html', form=form)
+        return redirect(url_for('main.sessions'))
+    return render_template('add_session.html', form=form, id_=id_)
 
 
 @main.route('/fromajax', methods=['GET', 'POST'])
@@ -63,4 +61,4 @@ def from_ajax():
         resp = {'response': 'not executed',
                 'message': 'data not updated'}
 
-    return flask.jsonify(**resp)
+    return jsonify(**resp)
