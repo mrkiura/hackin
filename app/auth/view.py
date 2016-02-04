@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, \
     url_for, flash
 from . import auth
 from .forms import FormLogin, FormSignUp
-from flask.ext.login import login_user, logout_user, login_required
+from flask.ext.login import login_user, logout_user, login_required, current_user
 from ..models import User
 from .. import db
 from flask import session
@@ -28,6 +28,7 @@ def authenticate():
 @auth.route('/logout')
 @login_required
 def logout():
+    fb = Firebase('https://hack-in.firebaseio.com/users')
     logout_user()
     flash('You have successfully logged out.')
     return redirect(url_for('main.index'))

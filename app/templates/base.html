@@ -1,8 +1,4 @@
-{% extends "bootstrap/base.html" %} 
-
-{% block title %}Home{% endblock %} 
-
-{% block navbar %}
+{% extends "bootstrap/base.html" %} {% block title %}Home{% endblock %} {% block navbar %}
 <div class="navbar navbar navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -18,11 +14,9 @@
             <ul class="nav navbar-nav">
                 <li id="sessions"><a href="/home">Home</a></li>
                 <li><a href="/new">Create Hack</a></li>
-                <li><a href="/home">My hacks</a></li>                
-
+                <li><a href="/home">My hacks</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 <li><a href="#">Help</a></li>
                 {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('auth.logout')}}">Sign out</a></li>
@@ -33,15 +27,19 @@
         </div>
     </div>
 </div>
-{% endblock %} 
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="container-fluid">
-
     {% block page_content %}{% endblock %}
 </div>
-{% endblock %}
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-{% endblock %}
+{% endblock %} {% block scripts %} {{ super() }}
+<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+<script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+<!-- ace  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
+<!-- firepad -->
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
+<link rel="stylesheet" href="../static/css/style.css" />
+<script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.js"></script>
+<script src="../static/js/editor.js"></script>
+{{ moment.include_moment() }} {% endblock %}

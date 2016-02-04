@@ -1,10 +1,7 @@
 #!/usr/bin/env python
-import socketio
+
 import eventlet
 from flask import Flask, render_template
-
-sio = socketio.Server()
-
 
 import os
 from app import create_app, db
@@ -23,6 +20,5 @@ manager.add_command('shell', Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
 
-if __name__ == '__main__':
-    app = socketio.Middleware(sio, app)
+if __name__ == '__main__':   
     manager.run()

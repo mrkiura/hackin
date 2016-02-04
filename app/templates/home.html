@@ -7,11 +7,11 @@
 <div class="col-md-2 well ">
 
 <h3>Available Users</h3>
-    {% for username, email in session['users'] %}
+    {% for user  in users %}
     
     <div class="list-group" id="code-sessions">
 
-        <button type="button" class="list-group-item">{{username}}</button>            
+        <button type="button" class="list-group-item" id = "online-users">{{user.username}} </button>            
 
     </div>
     {% endfor %}
@@ -24,14 +24,14 @@
 <div class="container col-md-6 well"> {% if current_user.is_authenticated %}
 <h3>Saved sessions</h3>
     <h1 id="username">{{current_user.username}}</h1> 
-    {% for session in sessions %}
+    {% for sess in sessions %}
     <div class="list-group" id="code-sessions">
-        {% if session.session_address %}
+        {% if sess.session_address %}
         <a href="{{session.session_address}}">
         {% else %}
         <a href="#" >
         {% endif %}
-          <h4 class="list-group-item">{{session.session_name}}</h4>
+          <h4 class="list-group-item">{{sess.session_name}}</h4>
           <!-- <button type="button" class="list-group-item">{{session.session_name}}</button> -->            
         </a>
         <!-- <p class="list-group-item-text">This is a session written in {{session.session_lang}}</p> -->

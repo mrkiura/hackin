@@ -25,7 +25,43 @@ $(document).ready(function() {
 
     }, 3000);
 
+    var usersAddr = 'https://hack-in.firebaseio.com/users';
+    var onlineUsers = []
+    var allUsers = []
+    var showOnlineUsers = function(users, exists) {
+        if (exists) {
+            for (user in users) {
+                allUsers.push(users[user]['user_id'])
+            }
+        }
 
+        if (allUsers) {
+            $.each(allUsers, function(a, b) {
+                if ($.inArray(b, onlineUsers) === -1) onlineUsers.push(b)
+            })
+        }
+
+    }
+    setTimeout(function() {
+        for (username in onlineUsers) {
+            $('#online-users').html(username)
+
+        }
+    }, 3000)
+    window['onlineUsers'] = onlineUsers
+
+
+
+    // Check for online users
+
+    var pollUsers = function() {
+        rootRef.child('users').once('value', function(snapshot) {
+            var exists = (snapshot.val() !== null);
+            showOnlineUsers(snapshot.val(), exists);
+        });
+    }
+
+    pollUsers()
 });
 
 var configEditor = function() {
@@ -55,9 +91,9 @@ var getFirebaseRef = function() {
         fbRef = fbRef.child(urlHash);
     } else {
 
-        if (window.location.pathname.indexOf('home') || window.location.pathname.indexOf('sessions')) {
-            return fbRef;
-        }
+        // if (window.location.pathname.indexOf('home') || window.location.pathname.indexOf('sessions')) {
+        //     return fbRef;
+        // }
 
 
         fbRef = fbRef.push(); // generate unique location.
@@ -83,6 +119,7 @@ var pushOnline = function(object, ref) {
     var newRef = ref.push();
     newRef.set(object);
 }
-if (window.location.pathname.indexOf('new')) {
+
+if (window.location.pathname.indexOf('session') != -1) {
     window.onload = configEditor;
 }

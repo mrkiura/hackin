@@ -7,11 +7,6 @@ from ..models import CodeSessions, User
 from flask.ext.login import current_user
 
 
-@main.route('/')
-def index():
-    return render_template('home.html', session=session)
-
-
 @main.route('/home')
 def home():
     online_users = User.query.all()
@@ -19,12 +14,18 @@ def home():
     user = User.query.get(current_user.id)
     sessions = user.sessions
     return render_template('home.html',
-                           sessions=sessions, session=session, users=online_users)
+                           sessions=sessions, users=online_users)
+
+
+@main.route('/')
+def index():
+    return redirect(url_for('main.home'))
 
 
 @main.route('/sessions')
 def sessions():
-    return render_template('sessions.html', session=session)
+    online_users = User.query.all()
+    return render_template('sessions.html', users=online_users)
 
 
 @main.route('/new', methods=['GET', 'POST'])
@@ -38,7 +39,7 @@ def new_session():
         db.session.add(user_)
         db.session.commit()
         s_id = session_.id
-        return redirect('/sessions')
+        return redirect(url_for('main.sessions'))
     return render_template('add_session.html', form=form)
 
 
