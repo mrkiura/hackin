@@ -18,7 +18,8 @@ def home():
     # query for sessions by this user
     user = User.query.get(current_user.id)
     sessions = user.sessions
-    return render_template('home.html', sessions=sessions, session=session, users=online_users)
+    return render_template('home.html',
+                           sessions=sessions, session=session, users=online_users)
 
 
 @main.route('/sessions')
@@ -36,9 +37,9 @@ def new_session():
         user_.sessions.append(session_)
         db.session.add(user_)
         db.session.commit()
-        id_ = session_.id
-        return redirect(url_for('main.sessions'))
-    return render_template('add_session.html', form=form, id_=id_)
+        s_id = session_.id
+        return redirect('/sessions')
+    return render_template('add_session.html', form=form)
 
 
 @main.route('/fromajax', methods=['GET', 'POST'])
