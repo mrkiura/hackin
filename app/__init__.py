@@ -6,6 +6,7 @@ from config import config
 from flask.ext.login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 
+
 bootstrap = Bootstrap()
 moment = Moment()
 db = SQLAlchemy()
@@ -29,4 +30,4 @@ def create_app(data):
     app.register_blueprint(auth_bp)
 
     return app
-    
+

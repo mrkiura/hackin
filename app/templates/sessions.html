@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block title %} Hackin - Session{% endblock %} 
+
+{% block page_content %}
+
+<h1>Start hacking  </h1>
+
+<h1 id="username">{{ current_user.username }}</h1> 
+<div class="container"> {% if current_user.is_authenticated %} 
+    <div id="firepad"></div>
+    {% else %} 
+    Please <a href="/login">Sign in</a> to start hacking or <a href="/signup">Sign up</a> if you are a new user
+    {% endif %}
+
+    
+   
+</div>
+
+{% block scripts %} {{super()}}
+<!-- firebase -->
+<script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+<!-- ace  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
+<!-- firepad -->
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
+<link rel="stylesheet" href="../static/css/style.css" />
+<script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="../static/js/editor.js"></script>
+{% endblock %} {% endblock %}

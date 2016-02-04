@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # data model respresentign many to many relationship.
 unions = db.Table('unions',
+
                   db.Column('session_id', db.Integer,
                             db.ForeignKey('tbl_sessions.id')),
                   db.Column(
@@ -18,10 +19,11 @@ class CodeSessions(db.Model):
 
     __tablename__ = 'tbl_sessions'
     id = db.Column(db.Integer, primary_key=True)
+    session_name = db.Column(db.String(250))
     session_address = db.Column(db.String(250))
 
     def __repr__(self):
-        return '<CodeSessions %r>' % self.session_address
+        return '<CodeSessions %r>' % self.session_name
 
 
 class User(UserMixin, db.Model):
@@ -53,4 +55,4 @@ class User(UserMixin, db.Model):
 
     @login_mgr.user_loader
     def load_user(user_id):
-      return User.query.get(int(user_id))
+        return User.query.get(int(user_id))

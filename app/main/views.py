@@ -1,7 +1,10 @@
-from flask import render_template, session, url_for, Response
+from flask import render_template, session, url_for, Response, redirect
 from . import main
 from .. import active
-from forms import FormLogin
+from forms import FormLogin, NewSession
+from .. import db
+from ..models import CodeSessions, User
+from app import login_mgr
 
 
 @main.route('/')
@@ -14,15 +17,20 @@ def home():
     return render_template('home.html')
 
 
-@main.route('/new')
+@main.route('/sessions')
+def sessions():
+    return render_template('sessions.html')
+
+
+@main.route('/new', methods=['GET', 'POST'])
 def new_session():
-    return render_template('add_session.html')
+    form = NewSession()
+    if form.validate_on_submit():
+        # session_ = CodeSessions(session_name=form.session_name.data)
 
-@main.route('/sessions'):
-return render_template('sessions.html')
+        # db.session.add(session_)
+        # db.session.commit()
+        return redirect(url_for('main.sessions'))
+    return render_template('add_session.html', form=form)
 
 
-# @main.route('/online')
-# def see_online():
-#     return Response('Online: %s' % ', '.join(active.get_online_users()),
-#                     mimetype='text/plain')

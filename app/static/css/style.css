@@ -1,23 +1,27 @@
 .home {
     font-family: "Roboto", sans-serif;
-    color: #fff;
+    color: black;
     font-size: 18px;
     /*color: white;*/
-    background: url(../img/pair_programming.png) top center no-repeat 
+    background: url(../img/background.jpg); /* no-repeat center fixed;*/
+    background-size: cover;
+}
+
+#username {
+    color: white;
 }
 
 #sign_in {
-   
-    padding-left: 550px;
+    padding-left: 600px;
     padding-top: 550px;
 }
 
 .container {
-	float: center;
+    float: center;
 }
 
 #firepad {
-  width: 700px;
-  height: 750px;
-  /*background-color: #483B3B; */
+    width: 700px;
+    height: 750px;
+    /*background-color: #483B3B; */
 }
