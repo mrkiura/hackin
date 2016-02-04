@@ -21,6 +21,7 @@ class CodeSessions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     session_name = db.Column(db.String(250))
     session_address = db.Column(db.String(250))
+    session_lang = db.Column(db.String(250))
 
     def __repr__(self):
         return '<CodeSessions %r>' % self.session_name

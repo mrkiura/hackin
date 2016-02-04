@@ -1,15 +1,11 @@
-{% extends "base.html" %} 
-{% block title %} Hackin - Home{% endblock %} 
-
-{% block page_content %}
-
-<h1>Start hacking  </h1> 
-<div class="container"> {% if current_user.is_authenticated %} 
-    
-    {% else %} 
-    Please <a href="/login">Sign in</a> to start hacking or <a href="/signup">Sign up</a> if you are a new user
-    {% endif %}
-   
+{% extends "base.html" %} {% block title %} Hackin - Home{% endblock %} {% block page_content %}
+<h1>Start hacking  </h1>
+<div class="container"> {% if current_user.is_authenticated %}
+    <h1 id="username">{{current_user.username}}</h1>
+    <div class="list-group" id="code-sessions">
+        
+    </div>
+    {% else %} Please <a href="/login">Sign in</a> to start hacking or <a href="/signup">Sign up</a> if you are a new user {% endif %}
 </div>
 {% block scripts %} {{super()}}
 <!-- firebase -->

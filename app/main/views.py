@@ -5,7 +5,7 @@ from forms import FormLogin, NewSession
 from .. import db
 from ..models import CodeSessions, User
 from app import login_mgr
-
+from flask.ext.login import login_user, logout_user, login_required, current_user
 
 @main.route('/')
 def index():
@@ -26,11 +26,14 @@ def sessions():
 def new_session():
     form = NewSession()
     if form.validate_on_submit():
-        # session_ = CodeSessions(session_name=form.session_name.data)
-
-        # db.session.add(session_)
-        # db.session.commit()
-        return redirect(url_for('main.sessions'))
+        session_ = CodeSessions(session_name=form.session_name.data, 
+            session_lang=form.language.data)
+        user_ = User.query.get(current_user.id)
+        user_.sessions.append(session_)
+        db.session.add(user_)
+        db.session.commit()
+        id_ = session_.id
+        return render_template('sessions.html', id_=id_)
     return render_template('add_session.html', form=form)
 
 

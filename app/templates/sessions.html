@@ -5,7 +5,8 @@
 
 <h1>Start hacking  </h1>
 
-<h1 id="username">{{ current_user.username }}</h1> 
+<p id="username">{{ current_user.username }}</p> 
+<p id="session_id">{{id_}}</p>
 <div class="container"> {% if current_user.is_authenticated %} 
     <div id="firepad"></div>
     {% else %} 

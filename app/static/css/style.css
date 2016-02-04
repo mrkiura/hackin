@@ -7,7 +7,7 @@
     background-size: cover;
 }
 
-#username {
+#username, #session_id {
     color: white;
 }
 
@@ -24,4 +24,8 @@
     width: 700px;
     height: 750px;
     /*background-color: #483B3B; */
+}
+
+.session-item {
+    10px solid black;
 }

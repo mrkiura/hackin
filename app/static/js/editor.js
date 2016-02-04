@@ -1,3 +1,13 @@
+var rootRef = new Firebase('https://hack-in.firebaseio.com');
+username = $('#username').text();
+sessionsRef = 'https://hack-in.firebaseio.com/'
+
+$(document).ready(function() {
+    console.log(window.location.pathname + window.location.hash);
+    console.log('username:', username)
+       
+});
+
 var configEditor = function() {
     // Get a firebase reference
     var firepadRef = getFirebaseRef();
@@ -16,7 +26,7 @@ var configEditor = function() {
         defaultText: '# let\'s write some python'
     });
 }
-    
+
 //get's a firebase ref, and adds a hash to the url
 var getFirebaseRef = function() {
     var fbRef = new Firebase('https://hack-in.firebaseio.com');
@@ -24,9 +34,7 @@ var getFirebaseRef = function() {
     if (urlHash) {
         fbRef = fbRef.child(urlHash);
     } else {
-        if (window.location.pathname.indexOf('home')) {
-            break;
-        }
+
         fbRef = fbRef.push(); // generate unique location.
         window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.
     }
@@ -39,7 +47,7 @@ var saveUserSession = function() {
         username: $('#username').text(),
         session: window.location.hash.replace(/#/g, '')
     }
-    console.log(sessionInfo);
+
     var rootRef = new Firebase('https://hack-in.firebaseio.com');
     childRef = $('#username').text();
     var sessionsRef = rootRef.child(childRef);
@@ -47,10 +55,9 @@ var saveUserSession = function() {
 }
 
 var pushOnline = function(object, ref) {
-  var newRef = ref.push();
-  newRef.set(object);
+    var newRef = ref.push();
+    newRef.set(object);
 }
 
 window.onload = configEditor;
 
-// saveUserSession();
