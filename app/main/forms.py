@@ -17,5 +17,5 @@ class NewSession(Form):
     session_name = StringField(
         'Session name', validators=[Required(), Length(1, 64)])
     language = SelectField(u'Programming Language', choices=[('js', 'javascript'),
-                           ('erb', 'ruby'), ('java', 'java') , ('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
+                                                             ('erb', 'ruby'), ('java', 'java'), ('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
     submit = SubmitField('Create session')

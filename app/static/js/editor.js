@@ -1,11 +1,31 @@
 var rootRef = new Firebase('https://hack-in.firebaseio.com');
 username = $('#username').text();
+session_id = $('#session_id').text();
 sessionsRef = 'https://hack-in.firebaseio.com/'
 
 $(document).ready(function() {
-    console.log(window.location.pathname + window.location.hash);
-    console.log('username:', username)
-       
+    url_ = '';
+    setTimeout(function() {
+        url_ = window.location.pathname + window.location.hash;
+
+        // send session details to server
+        $.ajax({
+            type: 'POST',
+            url: '/fromajax',
+            data: JSON.stringify({
+                id_: session_id,
+                username: username,
+                session_url: url_
+            }, null, '\t'),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(result) {
+                console.log(result);
+            }
+        });
+
+    }, 3000);
+
+
 });
 
 var configEditor = function() {
@@ -13,13 +33,13 @@ var configEditor = function() {
     var firepadRef = getFirebaseRef();
 
     //// Create ACE
-    var editor = ace.edit("firepad");
-    editor.setTheme("ace/theme/monokai");
+    var editor = ace.edit('firepad');
+    editor.setTheme('ace/theme/monokai');
     editor.setFontSize(20)
     var session = editor.getSession();
     session.setUseWrapMode(true);
     session.setUseWorker(false);
-    session.setMode("ace/mode/python");
+    session.setMode('ace/mode/python');
 
     // start a firepad instance
     var firepad = Firepad.fromACE(firepadRef, editor, {
@@ -34,6 +54,7 @@ var getFirebaseRef = function() {
     if (urlHash) {
         fbRef = fbRef.child(urlHash);
     } else {
+
 
         fbRef = fbRef.push(); // generate unique location.
         window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.
@@ -58,6 +79,6 @@ var pushOnline = function(object, ref) {
     var newRef = ref.push();
     newRef.set(object);
 }
-
-window.onload = configEditor;
-
+if (window.location.pathname.indexOf('new')) {
+    window.onload = configEditor;
+}
