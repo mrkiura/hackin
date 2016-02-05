@@ -14,7 +14,7 @@ nosetests.xml
 
 
 # SQLite databases
-*.sqlite
+
 
 # virtual env
 chat
