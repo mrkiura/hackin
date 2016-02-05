@@ -11,10 +11,13 @@ from flask.ext.login import current_user
 def home():
     online_users = User.query.all()
     # query for sessions by this user
-    user = User.query.get(current_user.id)
-    sessions = user.sessions
-    return render_template('home.html',
+    try:
+        user = User.query.get(current_user.id)
+        sessions = user.sessions
+        return render_template('home.html',
                            sessions=sessions, users=online_users)
+    except:
+        return render_template('home.html', users=online_users)
 
 
 @main.route('/')
@@ -48,15 +51,17 @@ def from_ajax():
     req_json = request.get_json()
     print req_json['id_']
     session_id = req_json['id_']
-    user = User.query.get(current_user.id)
+    try:
+        user = User.query.get(current_user.id)
 
-    if session_id:
-        codesession = CodeSessions.query.get(session_id)
+    except:
+        if session_id:
+            codesession = CodeSessions.query.get(session_id)
 
-        codesession.session_address = req_json['session_url']
-        user.sessions.append(codesession)
-        db.session.add(user)
-        db.session.commit()
+            codesession.session_address = req_json['session_url']
+            user.sessions.append(codesession)
+            db.session.add(user)
+            db.session.commit()
         resp = {'respose': 'successful',
                 'message': 'data received succesfully'}
     else:

@@ -9,7 +9,7 @@ $(document).ready(function() {
         url_ = window.location.pathname + window.location.hash;
 
         // send session details to server
-        $.ajax({
+        $.ajax({                                
             type: 'POST',
             url: '/fromajax',
             data: JSON.stringify({
@@ -50,9 +50,12 @@ $(document).ready(function() {
     }, 3000)
     window['onlineUsers'] = onlineUsers
 
+    $('#invite-btn').click(function() {
+        console.log('button clicked')
 
+    }); 
 
-    // Check for online users
+   // Check for online users
 
     var pollUsers = function() {
         rootRef.child('users').once('value', function(snapshot) {
