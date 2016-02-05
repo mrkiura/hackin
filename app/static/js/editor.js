@@ -15,7 +15,7 @@ $(document).ready(function() {
             data: JSON.stringify({
                 id_: session_id,
                 username: username,
-                session_url: url_
+                session_url: ('https://hackin.herokuapp.com' + url_), 
             }, null, '\t'),
             contentType: 'application/json;charset=UTF-8',
             success: function(result) {
