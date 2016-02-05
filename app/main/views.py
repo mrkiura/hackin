@@ -38,11 +38,12 @@ def new_session():
     if form.validate_on_submit():
         session_ = CodeSessions(session_name=form.session_name.data,
                                 session_lang=form.language.data)
-        user_ = User.query.get(current_user.id)
-        user_.sessions.append(session_)
-        db.session.add(user_)
-        db.session.commit()
-        s_id = session_.id
+        if current_user.id:            
+            user_ = User.query.get(current_user.id)
+            user_.sessions.append(session_)
+            db.session.add(user_)
+            db.session.commit()
+            s_id = session_.id
         return redirect(url_for('main.sessions'))
     return render_template('add_session.html', form=form)
 

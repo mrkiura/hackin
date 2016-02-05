@@ -65,7 +65,8 @@ $(document).ready(function() {
             data: JSON.stringify({
                 id_: session_id,
                 username_: username,
-                session_addr: ('https://hackin.herokuapp.com' + url_),
+                session_addr: 'hackin.herokuapp.com' + window.location.pathname + window.location.hash,                                                                                                                                                                                                                                                                                                                                   
+                // session_addr: ('https://hackin.herokuapp.com' + url_),
             }, null, '\t'),
             contentType: 'application/json;charset=UTF-8',
             success: function(result) {
