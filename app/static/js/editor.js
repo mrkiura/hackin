@@ -9,7 +9,7 @@ $(document).ready(function() {
         url_ = window.location.pathname + window.location.hash;
 
         // send session details to server
-        $.ajax({                                
+        $.ajax({
             type: 'POST',
             url: '/fromajax',
             data: JSON.stringify({
@@ -50,12 +50,33 @@ $(document).ready(function() {
     }, 3000)
     window['onlineUsers'] = onlineUsers
 
-    $('#invite-btn').click(function() {
-        console.log('button clicked')
+    $('.invite-btn').on('click', function(g) {
+       
+        g.preventDefault();
+        var key = $(this).parent().parent().find("td:first-child").text();
+        console.log(key)
 
-    }); 
+        url_ = window.location.pathname + window.location.hash;
 
-   // Check for online users
+        // send invite details to server
+        $.ajax({
+            type: 'POST',
+            url: '/sendmail', 
+            data: JSON.stringify({
+                id_: session_id,
+                username_: username,
+                session_addr: url_
+            }, null, '\t'),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(result) {
+                console.log(result);
+            }
+        });
+
+
+    });
+
+    // Check for online users
 
     var pollUsers = function() {
         rootRef.child('users').once('value', function(snapshot) {

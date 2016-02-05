@@ -4,6 +4,22 @@
 {% block page_content %}
 
 <h1>Start hacking  </h1>
+<div class="col-md-3 well ">
+    <h3>Available Users</h3>
+    <table class="table table-bordered">
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td id="invited-user">{{user.username}}</td>
+                <td>
+                    <button type="submit" class="btn btn-info invite-btn">Invite</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
 
 <p id="username">{{ current_user.username }}</p> 
 <p id="session_id">{{id_}}</p>

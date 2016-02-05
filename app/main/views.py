@@ -5,6 +5,7 @@ from forms import FormLogin, NewSession
 from .. import db
 from ..models import CodeSessions, User
 from flask.ext.login import current_user
+from .email import send_email
 
 
 @main.route('/home')
@@ -15,7 +16,7 @@ def home():
         user = User.query.get(current_user.id)
         sessions = user.sessions
         return render_template('home.html',
-                           sessions=sessions, users=online_users)
+                               sessions=sessions, users=online_users)
     except:
         return render_template('home.html', users=online_users)
 
@@ -67,5 +68,29 @@ def from_ajax():
     else:
         resp = {'response': 'not executed',
                 'message': 'data not updated'}
+
+    return jsonify(**resp)
+
+
+@main.route('/sendmail', methods=['GET', 'POST'])
+def send_mail():
+    req_json = request.get_json()
+   
+    recipient_username = req_json['username_']
+    # try:
+    user = User.query.filter_by(username=recipient_username).first()
+    recipient_email = user.email
+    subject = 'Join me for a programming session on hackin.'
+
+    message = {}
+    message['body'] = 'Join me for a programming session on hackin.'
+    message['html'] = req_json['session_addr']
+    send_email(subject, message, recipient_email)
+
+    resp = {'respose': 'successful',
+            'message': 'data received succesfully'}
+    # except:
+    #     resp = {'response': 'not executed',
+    #             'message': 'data not updated'}
 
     return jsonify(**resp)

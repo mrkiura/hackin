@@ -11,6 +11,12 @@ class Config:
     SQLALCHEMY_DATABASE_URI = \
         'sqlite:///' + os.path.join(basedir, 'data.sqlite')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = 'nullpointer16'
+    MAIL_PASSWORD = 'jcqvollzkglkpuoe'
+    MAIL_SENDER = 'Admin <nullpointer16@gmail.com>'
 
 
     @staticmethod

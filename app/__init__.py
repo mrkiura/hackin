@@ -5,11 +5,13 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
 from flask.ext.login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
+from flask.ext.mail import Mail
 
 
 bootstrap = Bootstrap()
 moment = Moment()
 db = SQLAlchemy()
+mail = Mail()
 login_mgr = LoginManager()
 login_mgr.session_protection = 'strong'
 login_mgr.login_view = 'login'
@@ -22,6 +24,7 @@ def create_app(data):
     bootstrap.init_app(app)
     moment.init_app(app)
     login_mgr.init_app(app)
+    mail.init_app(app)
     toolbar = DebugToolbarExtension(app)
 
     from main import main as main_bp
