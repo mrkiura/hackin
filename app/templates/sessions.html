@@ -23,15 +23,33 @@
 
 <p id="username">{{ current_user.username }}</p> 
 <p id="session_id">{{id_}}</p>
-<div class="container"> {% if current_user.is_authenticated %} 
+<div class="container col-md-6"> {% if current_user.is_authenticated %} 
     <div id="firepad"></div>
     {% else %} 
     Please <a href="/login">Sign in</a> to start hacking or <a href="/signup">Sign up</a> if you are a new user
-    {% endif %}
-	
-    
+    {% endif %}    
    
 </div>
+
+<div class="chat-container col-md-3">
+  <header>Chat Messages</header>
+
+   <div class='toolbar'>
+    <label for="nameInput">Username:</label>
+    <input type='text' id='nameInput' placeholder='enter a nickname to use for the chat..'>
+  </div>
+
+  <ul id='messages' class="chat-messages"></ul>
+
+  <footer>
+    <input type='text' id='messageInput'  placeholder='Type a message...'>
+  </footer>
+</div>
+
+
+
+
+
 
 {% block scripts %} {{super()}}
 <!-- firebase -->
@@ -39,9 +57,11 @@
 <!-- ace  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
 <!-- firepad -->
+
 <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
 <link rel="stylesheet" href="../static/css/style.css" />
 <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="../static/js/editor.js"></script>
+<script src="../static/js/chat.js"></script>
 {% endblock %} {% endblock %}

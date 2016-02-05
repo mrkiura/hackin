@@ -7,7 +7,7 @@ $(document).ready(function() {
     url_ = '';
     setTimeout(function() {
         url_ = window.location.pathname + window.location.hash;
-
+        console.log(session_id)
         // send session details to server
         $.ajax({
             type: 'POST',
@@ -115,11 +115,6 @@ var getFirebaseRef = function() {
     if (urlHash) {
         fbRef = fbRef.child(urlHash);
     } else {
-
-        // if (window.location.pathname.indexOf('home') || window.location.pathname.indexOf('sessions')) {
-        //     return fbRef;
-        // }
-
 
         fbRef = fbRef.push(); // generate unique location.
         window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.
