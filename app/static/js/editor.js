@@ -73,8 +73,6 @@ $(document).ready(function() {
                 console.log(result);
             }
         });
-
-
     });
 
     // Check for online users

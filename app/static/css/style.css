@@ -6,12 +6,12 @@
     background: url(../img/background.jpg); /* no-repeat center fixed;*/
     background-size: cover;
 }
-/*
+
 #user_name, #session_id {
     color: white;
 }
 
-*/
+
 #sign_in {
     padding-left: 600px;
     padding-top: 550px;
