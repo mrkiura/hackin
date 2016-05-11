@@ -12,6 +12,7 @@ pip-log.txt
 .tox
 nosetests.xml
 
+*.sh
 
 # SQLite databases
 
