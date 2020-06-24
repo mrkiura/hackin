@@ -30,7 +30,7 @@ path.py==8.1.2
 pexpect==4.0.1
 pickleshare==0.6
 ptyprocess==0.5
-python-engineio==0.7.1
+python-engineio==3.8.2.post1
 -e git://github.com/mikexstudios/python-firebase.git@fc0597aafb1cb83c76e039370b1e0e180322f0e0#egg=python_firebase
 python-socketio==0.6.1
 redis==2.10.5
